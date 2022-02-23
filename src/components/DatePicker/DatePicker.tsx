@@ -6,10 +6,36 @@ import './date-picker.css';
 
 interface Props {
   isClearable?: boolean;
-  onChange: (date: Date) => any;
+  onChange: (date: Date) => unknown;
   selectedDate: Date | undefined;
   showPopperArrow?: boolean;
 }
+
+const days: Record<number, string> = ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'];
+const months = [
+  'Enero',
+  'Febrero',
+  'Marzo',
+  'Abril',
+  'Mayo',
+  'Junio',
+  'Julio',
+  'Agosto',
+  'Septiembre',
+  'Octubre',
+  'Noviembre',
+  'Diciembre',
+];
+
+const locale : any = {
+  localize: {
+    day: (n: number) => days[n],
+    month: (n: number) => months[n],
+  },
+  formatLong: {
+    date: () => 'dd/mm/yyyy',
+  },
+};
 
 const DatePicker = ({
   selectedDate,
@@ -20,7 +46,12 @@ const DatePicker = ({
 }: Props & ReactDatePickerProps & HTMLAttributes<HTMLElement>) => {
   return (
     <ReactDatePicker
-      onChangeRaw={(e) => e.preventDefault()}
+
+      locale={locale}
+      onChangeRaw={(e: React.FocusEvent<HTMLInputElement, Element>) =>
+        e.preventDefault()
+      }
+      dateFormat="dd/MM/yyyy"
       selected={selectedDate}
       onChange={onChange}
       isClearable={isClearable}

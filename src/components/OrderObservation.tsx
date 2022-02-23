@@ -4,21 +4,28 @@ import {
   Button,
   Divider,
   Flex,
-  FormLabel,
+  FormControl,
   HStack,
   Input,
+  Stack,
   Text,
+  Textarea,
   VStack,
 } from '@chakra-ui/react';
-import React, { useEffect, useState } from 'react';
+import React, {
+  ChangeEventHandler,
+  FormEventHandler,
+  SyntheticEvent,
+  useEffect,
+  useState,
+} from 'react';
 import { Order } from '../interfaces/Order';
 import DatePicker from './DatePicker/DatePicker';
-import { Stack } from '@chakra-ui/react';
 
 export default function OrderObservation() {
   // const { getOrderById } = useOrders();
   const [input, setInput] = useState({
-    orderedDate: '',
+    orderedDate: new Date(),
     number: '',
     owners: [],
     adress: '',
@@ -32,13 +39,14 @@ export default function OrderObservation() {
     yearNumber: 0,
     observations: '',
     orderAmmount: 0,
-    informedDate: '',
+    informedDate: new Date(),
     totalArea: 0,
+    bankName: ''
   } as Order);
 
   useEffect(() => {
     setInput({
-      orderedDate: '22/02/2022',
+      orderedDate: new Date(),
       number: '3123213KKKKKKKKKKKK',
       owners: [
         {
@@ -63,10 +71,46 @@ export default function OrderObservation() {
       yearNumber: 2021,
       observations: 'Casa Papa',
       orderAmmount: 321312,
-      informedDate: '22/02/2022',
+      informedDate: new Date(),
       totalArea: 123123,
+      bankName: 'Banco Macro'
     });
+    console.log('Init');
   }, []);
+
+  const handleInputChange: ChangeEventHandler<
+    HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+  > = (e) => {
+    setInput((prevValue) => ({
+      ...prevValue,
+      [e.target.id]: e.target.value,
+    }));
+    //console.log(input);
+  };
+
+  const handleDateChange: ((date: Date) => unknown) &
+    ((date: Date | null, event: SyntheticEvent<Event>) => void) &
+    FormEventHandler<HTMLElement> = (eventDate) => {
+    setInput((prevValue) => ({
+      ...prevValue,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //@ts-ignore
+      orderedDate: new Date(eventDate),
+    }));
+    console.log(input);
+  };
+
+  const handleDateChange2: ((date: Date) => unknown) &
+    ((date: Date | null, event: SyntheticEvent<Event>) => void) &
+    FormEventHandler<HTMLElement> = (eventDate) => {
+    setInput((prevValue) => ({
+      ...prevValue,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //@ts-ignore
+      informedDate: new Date(eventDate),
+    }));
+    console.log(input);
+  };
 
   const boxHeadStyle: React.CSSProperties = {
     textDecoration: 'underline',
@@ -94,21 +138,46 @@ export default function OrderObservation() {
             rowGap={2}
           >
             <HStack>
+              {/* Input field for orderedDate - Fehcha de solicitud*/}
+
               <Text style={{ whiteSpace: 'nowrap' }}>Fecha de solicitud: </Text>
-              <DatePicker />
+              <FormControl>
+                {input.orderedDate ? (
+                  <DatePicker
+                    id="orderedDate"
+                    selectedDate={input.orderedDate}
+                    onChange={handleDateChange}
+                    showPopperArrow={true}
+                  />
+                ) : (
+                  <></>
+                )}
+              </FormControl>
             </HStack>
             <HStack>
               <Text style={{ whiteSpace: 'nowrap' }}>Nro Solicitud: </Text>
-              <Input value={input.number} />
+              <Input
+                id="number"
+                value={input.number}
+                onChange={handleInputChange}
+              />
             </HStack>
           </Flex>
           <HStack>
             <Text>Banco: </Text>
-            <Input value={'Banco MACRO'} />
+            <FormControl>
+              <Input id="bankName" value={input.bankName} onChange={handleInputChange} />
+            </FormControl>
           </HStack>
           <HStack>
             <Text>Sucursal: </Text>
-            <Input value={input.office} />
+            <FormControl>
+              <Input
+                id="office"
+                value={input.office}
+                onChange={handleInputChange}
+              />
+            </FormControl>
           </HStack>
         </VStack>
 
@@ -154,27 +223,57 @@ export default function OrderObservation() {
             <VStack w={['100%', '100%', '50%']} align="stretch">
               <HStack>
                 <Text style={{ whiteSpace: 'nowrap' }}>Domicilio: </Text>
-                <Input value={input.adress} />
+                <FormControl>
+                  <Input
+                    id="adress"
+                    value={input.adress}
+                    onChange={handleInputChange}
+                  />
+                </FormControl>
               </HStack>
               <HStack>
                 <Text style={{ whiteSpace: 'nowrap' }}>Localidad : </Text>
-                <Input value={input.city} />
+                <FormControl>
+                  <Input
+                    id="city"
+                    value={input.city}
+                    onChange={handleInputChange}
+                  />
+                </FormControl>
               </HStack>
 
               <HStack>
                 <Text style={{ whiteSpace: 'nowrap' }}>Sup. Total : </Text>
-                <Input value={input.totalArea} />
+                <FormControl>
+                  <Input
+                    id="totalArea"
+                    value={input.totalArea}
+                    onChange={handleInputChange}
+                  />
+                </FormControl>
               </HStack>
             </VStack>
 
             <VStack w={['100%', '100%', '50%']} align="stretch">
               <HStack>
                 <Text style={{ whiteSpace: 'nowrap' }}>Dpto: </Text>
-                <Input value={input.department} />
+                <FormControl>
+                  <Input
+                    id="department"
+                    value={input.department}
+                    onChange={handleInputChange}
+                  />
+                </FormControl>
               </HStack>
               <HStack>
                 <Text style={{ whiteSpace: 'nowrap' }}>Provincia: </Text>
-                <Input value={input.state} />
+                <FormControl>
+                  <Input
+                    id="state"
+                    value={input.state}
+                    onChange={handleInputChange}
+                  />
+                </FormControl>
               </HStack>
             </VStack>
           </Stack>
@@ -186,13 +285,40 @@ export default function OrderObservation() {
           <Text>Matricula</Text>
           <Stack direction={['column', 'column', 'row']} align={'stretch'}>
             <Box flex={1}>
-              <Text>FOLIO: {input.folioNumber}</Text>
+              <HStack>
+                <Text style={{ whiteSpace: 'nowrap' }}>Folio: </Text>
+                <FormControl>
+                  <Input
+                    id="folioNumber"
+                    value={input.folioNumber}
+                    onChange={handleInputChange}
+                  />
+                </FormControl>
+              </HStack>
             </Box>
             <Box flex={1}>
-              <Text>TOMO: {input.volumeNumer}</Text>
+              <HStack>
+                <Text style={{ whiteSpace: 'nowrap' }}>Tomo: </Text>
+                <FormControl>
+                  <Input
+                    id="volumeNumer"
+                    value={input.volumeNumer}
+                    onChange={handleInputChange}
+                  />
+                </FormControl>
+              </HStack>
             </Box>
             <Box flex={1}>
-              <Text>AÑO: {input.yearNumber}</Text>
+              <HStack>
+                <Text style={{ whiteSpace: 'nowrap' }}>Año: </Text>
+                <FormControl>
+                  <Input
+                    id="yearNumber"
+                    value={input.yearNumber}
+                    onChange={handleInputChange}
+                  />
+                </FormControl>
+              </HStack>
             </Box>
           </Stack>
         </Box>
@@ -200,14 +326,51 @@ export default function OrderObservation() {
         {/* BOX No5 = Observaciones */}
         <Box border="1px solid #000" mb={2} paddingY={2} px={4}>
           <Text style={boxHeadStyle}>Observaciones</Text>
-          <Text>{input.observations}</Text>
+          <FormControl>
+            <Textarea
+              id="observations"
+              onChange={handleInputChange}
+              value={input.observations}
+            ></Textarea>
+          </FormControl>
         </Box>
 
         <Box mb={2} paddingY={2} px={4}>
-          <Flex direction="row" alignItems="stretch">
-            <Box flex={1}>
-              <Text>Costo del informe: $ {input.orderAmmount}</Text>
-              <Text>Informado el día: {input.informedDate}</Text>
+          <Flex
+            direction={['column', 'column', 'row']}
+            alignItems="stretch"
+            columnGap={3}
+            alignContent="center"
+            justifyContent={'center'}
+          >
+            <Box flex={1} display="flex" flexDirection="column" rowGap={2}>
+              <FormControl>
+                <HStack>
+                  <Text style={{ whiteSpace: 'nowrap' }}>
+                    Costo del informe: ${' '}
+                  </Text>
+                  <Input
+                    id="orderAmmount"
+                    value={input.orderAmmount}
+                    onChange={handleInputChange}
+                  ></Input>
+                </HStack>
+              </FormControl>
+
+              <FormControl
+                display="flex"
+                flexDirection="row"
+                alignItems="center"
+              >
+                <Text style={{ whiteSpace: 'nowrap' }} me={2}>
+                  Informado el día:{' '}
+                </Text>
+                <DatePicker
+                  id="informedDate"
+                  onChange={handleDateChange2}
+                  selectedDate={input.informedDate}
+                />
+              </FormControl>
             </Box>
             <Box flex={1}>
               <Text>Verificador: [ Aquí iria la firma ] </Text>
@@ -224,7 +387,6 @@ export default function OrderObservation() {
           <Button>Guardar</Button>
         </Flex>
 
-        {/* Input field for orderedDate */}
         {/* Input field for number */}
         {/* Input field for owners */}
         {/* Input field for adress */}

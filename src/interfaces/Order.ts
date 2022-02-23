@@ -1,7 +1,7 @@
 import { Owner } from './Owner';
 
 export interface Order {
-  orderedDate: string;
+  orderedDate: Date;
   number: string;
   owners: Owner[];
   adress: string;
@@ -15,6 +15,7 @@ export interface Order {
   yearNumber: number;
   observations: string;
   orderAmmount: number;
-  informedDate: string;
+  informedDate: Date;
   totalArea: number;
+  bankName: string;
 }

@@ -93,40 +93,36 @@ export default function LoginForm() {
   };
 
   return (
-    <Container>
-      <Box maxW={500} marginX="auto" marginY={10}>
-        <form onSubmit={handleSubmit}>
-          <FormControl isInvalid={errors.username.value} mt={4}>
-            <FormLabel htmlFor="email">Email o nombre de usuario</FormLabel>
-            <Input
-              id="username"
-              type="text"
-              value={input.username}
-              onChange={handleInputChange}
-            />
-            <FormErrorMessage>{errors.username.message}</FormErrorMessage>
-          </FormControl>
+    <form onSubmit={handleSubmit}>
+      <FormControl isInvalid={errors.username.value}>
+        <FormLabel htmlFor="email">Email o nombre de usuario</FormLabel>
+        <Input
+          id="username"
+          type="text"
+          value={input.username}
+          onChange={handleInputChange}
+        />
+        <FormErrorMessage>{errors.username.message}</FormErrorMessage>
+      </FormControl>
 
-          <FormControl isInvalid={errors.password.value} mt={4}>
-            <FormLabel htmlFor="email">Contraseña</FormLabel>
-            <Input
-              id="password"
-              type="password"
-              value={input.password}
-              onChange={handleInputChange}
-            />
+      <FormControl isInvalid={errors.password.value} mt={4}>
+        <FormLabel htmlFor="email">Contraseña</FormLabel>
+        <Input
+          id="password"
+          type="password"
+          value={input.password}
+          onChange={handleInputChange}
+        />
 
-            <FormErrorMessage>{errors.password.message}</FormErrorMessage>
-          </FormControl>
+        <FormErrorMessage>{errors.password.message}</FormErrorMessage>
+      </FormControl>
 
-          <Flex justifyContent="space-between" mt={4}>
-            <Link to="/">
-              <Button variant="outline-red">Cancelar</Button>
-            </Link>
-            <Button type="submit">Iniciar Sesión</Button>
-          </Flex>
-        </form>
-      </Box>
-    </Container>
+      <Flex justifyContent="space-between" mt={4}>
+        <Link to="/">
+          <Button variant="outline-red">Cancelar</Button>
+        </Link>
+        <Button type="submit">Iniciar Sesión</Button>
+      </Flex>
+    </form>
   );
 }

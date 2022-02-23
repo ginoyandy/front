@@ -1,12 +1,16 @@
 import { ArrowForwardIcon } from '@chakra-ui/icons';
-import { Button, Flex, Heading } from '@chakra-ui/react';
+import { Button, Flex, Heading, Box } from '@chakra-ui/react';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { isLogged } from '../services/user.service';
+import hqLogo from '../resources/images/hq-logo.png';
 
 export default function HomeMain() {
   return (
     <Flex direction="column" alignItems="center">
+      <Box maxW="40vh" mt={4}>
+        <img src={hqLogo} alt="" />
+      </Box>
       <Heading fontWeight={800} mb={2} fontSize="xxx-large">
         HQ & Asociados
       </Heading>
