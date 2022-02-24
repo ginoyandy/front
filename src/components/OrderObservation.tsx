@@ -10,6 +10,7 @@ import {
   Stack,
   Text,
   Textarea,
+  useToast,
   VStack,
 } from '@chakra-ui/react';
 import React, {
@@ -20,10 +21,12 @@ import React, {
   useState,
 } from 'react';
 import { Order } from '../interfaces/Order';
+import { putOrder } from '../services/orders.service';
 import DatePicker from './DatePicker/DatePicker';
 
 export default function OrderObservation() {
   // const { getOrderById } = useOrders();
+  const toast = useToast();
   const [input, setInput] = useState({
     orderedDate: new Date(),
     number: '',
@@ -41,7 +44,7 @@ export default function OrderObservation() {
     orderAmmount: 0,
     informedDate: new Date(),
     totalArea: 0,
-    bankName: ''
+    bankName: '',
   } as Order);
 
   useEffect(() => {
@@ -73,7 +76,7 @@ export default function OrderObservation() {
       orderAmmount: 321312,
       informedDate: new Date(),
       totalArea: 123123,
-      bankName: 'Banco Macro'
+      bankName: 'Banco Macro',
     });
     console.log('Init');
   }, []);
@@ -91,25 +94,43 @@ export default function OrderObservation() {
   const handleDateChange: ((date: Date) => unknown) &
     ((date: Date | null, event: SyntheticEvent<Event>) => void) &
     FormEventHandler<HTMLElement> = (eventDate) => {
-    setInput((prevValue) => ({
-      ...prevValue,
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //@ts-ignore
-      orderedDate: new Date(eventDate),
-    }));
-    console.log(input);
-  };
+      setInput((prevValue) => ({
+        ...prevValue,
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //@ts-ignore
+        orderedDate: new Date(eventDate),
+      }));
+      console.log(input);
+    };
 
   const handleDateChange2: ((date: Date) => unknown) &
     ((date: Date | null, event: SyntheticEvent<Event>) => void) &
     FormEventHandler<HTMLElement> = (eventDate) => {
-    setInput((prevValue) => ({
-      ...prevValue,
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //@ts-ignore
-      informedDate: new Date(eventDate),
-    }));
-    console.log(input);
+      setInput((prevValue) => ({
+        ...prevValue,
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //@ts-ignore
+        informedDate: new Date(eventDate),
+      }));
+      console.log(input);
+    };
+
+  const onSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+    event.preventDefault();
+    console.log('Acá');
+    const response = await putOrder(input);
+    console.log(response);
+    // .then((res) => console.log(res))
+    // .catch((err) => {
+    //   console.log(err);
+    //   toast({
+    //     status: 'error',
+    //     description:
+    //       err instanceof Error ? err.message : 'Error no controlado',
+    //     isClosable: true,
+    //     title: 'Error',
+    //   });
+    // });
   };
 
   const boxHeadStyle: React.CSSProperties = {
@@ -121,7 +142,7 @@ export default function OrderObservation() {
 
   return (
     <div>
-      <form>
+      <form onSubmit={onSubmit}>
         {/* BOX No1 = VERIFICACION REGISTRAL DEL INMUEBLE */}
         <VStack
           border="1px solid #000"
@@ -166,7 +187,11 @@ export default function OrderObservation() {
           <HStack>
             <Text>Banco: </Text>
             <FormControl>
-              <Input id="bankName" value={input.bankName} onChange={handleInputChange} />
+              <Input
+                id="bankName"
+                value={input.bankName}
+                onChange={handleInputChange}
+              />
             </FormControl>
           </HStack>
           <HStack>
@@ -384,7 +409,7 @@ export default function OrderObservation() {
           <Button variant="outline">
             <ArrowBackIcon /> Volver atrás
           </Button>
-          <Button>Guardar</Button>
+          <Button type="submit">Guardar</Button>
         </Flex>
 
         {/* Input field for number */}

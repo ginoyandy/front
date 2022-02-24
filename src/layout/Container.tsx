@@ -11,11 +11,15 @@ export default function Container({ maxW, children }: props) {
   return (
     <ChakraContainer
       maxW={maxW || 'container.lg'}
-      mt={[0, 0, 0, 8]}
+      mt={maxW === 'container.sm' ? [0, 8, 8, 8, 8, 8] : [0, 0, 0, 8]}
       mx="auto"
       bg="white"
       boxShadow="sm"
-      borderRadius={[0, 0, 0, 'xl']}
+      borderRadius={
+        maxW === 'container.sm'
+          ? [0, 'xl', 'xl', 'xl', 'xl', 'xl']
+          : [0, 0, 0, 'xl']
+      }
       py={4}
       px={8}
     >

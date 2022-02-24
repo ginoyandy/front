@@ -7,6 +7,7 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
 import { OrderContextProvider } from './context/OrdersContext';
+import { UserContextProvider } from './context/UserContext';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import OrderObservationPage from './pages/OrderObservationPage';
@@ -16,18 +17,20 @@ import theme from './theme';
 function App() {
   return (
     <ChakraProvider theme={theme}>
-      <OrderContextProvider>
-        <Box bg="gray.200" minHeight="100vh">
-          <Navbar />
+      <UserContextProvider>
+        <OrderContextProvider>
+          <Box bg="gray.200" minHeight="100vh">
+            <Navbar />
 
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/order/observe" element={<OrderObservationPage />} />
-            <Route path="/login" element={<LoginPage />} />
-            {isLogged() ? 'a' : 'b'}
-          </Routes>
-        </Box>
-      </OrderContextProvider>
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/order/observe" element={<OrderObservationPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              {isLogged() ? 'a' : 'b'}
+            </Routes>
+          </Box>
+        </OrderContextProvider>
+      </UserContextProvider>
     </ChakraProvider>
   );
 }

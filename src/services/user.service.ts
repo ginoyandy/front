@@ -40,6 +40,7 @@ export async function logInUser(user: UserLogin) {
     saveToken(data.token);
     return data as loginResponse;
   } catch (error) {
+    console.log(error);
     throw new Error(
       'Fallo al iniciar sesión - Posible usuario o contraseña inválidos',
     );

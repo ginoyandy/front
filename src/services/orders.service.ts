@@ -1,16 +1,16 @@
-import axios, { Axios, AxiosRequestHeaders } from 'axios';
-import { Order } from '../interfaces/Order';
+import axios, { AxiosRequestHeaders } from 'axios';
+import { Order } from './../interfaces/Order';
 
-const { token } = useUser();
-const headers: AxiosRequestHeaders = { Authorization: `Bearer ${token}` };
-
-const api: Axios = axios.create({
-  baseURL: import.meta.env.VITE_APP_API_URL as string,
-});
+const token = window.localStorage.getItem('token');
+console.log(token);
+const headers: AxiosRequestHeaders = {
+  Authorization: `Bearer ${token || 'missing_token'}`,
+};
+const URL = import.meta.env.VITE_APP_API_URL as string;
 
 export async function getOrders(): Promise<Order[]> {
   try {
-    const response = await api.get('/orders', { headers });
+    const response = await axios.get(`${URL}/orders`, { headers });
     const { data } = response;
     return data;
   } catch (error: any) {
@@ -22,7 +22,7 @@ export async function getOrders(): Promise<Order[]> {
 
 export async function searchOrderById(orderId: string): Promise<Order> {
   try {
-    const response = await api.get(`/orders/${orderId}`, { headers });
+    const response = await axios.get(`${URL}/orders/${orderId}`, { headers });
     const { data } = response;
     return data;
   } catch (error: any) {
@@ -36,8 +36,25 @@ export async function searchOrderById(orderId: string): Promise<Order> {
 
 export async function newOrder(nwOrderData: Order) {
   try {
-    const response = await api.post('/order', nwOrderData, { headers });
+    const response = await axios.post(`${URL}/orders`, nwOrderData, {
+      headers,
+    });
+    const { data } = response;
+    return data;
   } catch (error: any) {
+    throw new Error(
+      error.message ? error.messagge : 'Error al solicitar guardar pedido. ',
+    );
+  }
+}
+
+export async function putOrder(nwOrderData: Order) {
+  try {
+    console.log(URL);
+    const response = await axios.put(`${URL}/orders`, nwOrderData);
+    return response;
+  } catch (error: any) {
+    console.log(error);
     throw new Error(
       error.message ? error.messagge : 'Error al solicitar guardar pedido. ',
     );
