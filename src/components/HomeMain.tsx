@@ -20,7 +20,7 @@ export default function HomeMain() {
 
       <Link to={isLogged() ? '/causas' : '/login'}>
         <Button mt={5}>
-          {isLogged() ? 'Ver causas' : 'Iniciar sesión'}
+          {isLogged() ? 'Pedidos' : 'Iniciar sesión'}
           <ArrowForwardIcon marginStart={2} />
         </Button>
       </Link>

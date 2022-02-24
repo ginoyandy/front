@@ -2,6 +2,7 @@ import axios from 'axios';
 import { UserRegister, UserLogin } from '../schemas/user.schema';
 
 const BASE_URL = import.meta.env.VITE_APP_API_URL;
+console.log(BASE_URL);
 
 type registerResponse = {
   username: string;
@@ -12,7 +13,7 @@ type registerResponse = {
 export async function registerUser(newUser: UserRegister) {
   try {
     console.log('bb');
-    const response = await axios.post(`${BASE_URL}/api/users`, newUser);
+    const response = await axios.post(`${BASE_URL}/users`, newUser);
     const { data } = response;
     saveToken(data.token);
     return data as registerResponse;
@@ -35,7 +36,7 @@ type errorResponse = {
 
 export async function logInUser(user: UserLogin) {
   try {
-    const response = await axios.post(`${BASE_URL}/api/users/login`, user);
+    const response = await axios.post(`${BASE_URL}/users/login`, user);
     const { data } = response;
     saveToken(data.token);
     return data as loginResponse;

@@ -13,9 +13,9 @@ export async function getOrders(): Promise<Order[]> {
     const response = await axios.get(`${URL}/orders`, { headers });
     const { data } = response;
     return data;
-  } catch (error: any) {
+  } catch (error) {
     throw new Error(
-      error.message ? error.messagge : 'Error al solicitar pedidos. ',
+      error instanceof Error ? error.message : 'Error al solicitar pedidos. ',
     );
   }
 }
@@ -25,12 +25,26 @@ export async function searchOrderById(orderId: string): Promise<Order> {
     const response = await axios.get(`${URL}/orders/${orderId}`, { headers });
     const { data } = response;
     return data;
-  } catch (error: any) {
+  } catch (error) {
     throw new Error(
-      error.message
-        ? error.messagge
+      error instanceof Error
+        ? error.message
         : `Error al solicitar pedido con ID = ${orderId}. `,
     );
+  }
+}
+
+export async function loadExcel(excelFile: FormData) {
+  try {
+    const response = await axios.post(`${URL}/orders/excel`, excelFile, {
+      headers,
+    });
+    const { data } = response;
+    return data;
+  } catch (error) {
+    error instanceof Error
+      ? error.message
+      : 'Error al solicitar guardar pedido. ';
   }
 }
 
@@ -41,10 +55,10 @@ export async function newOrder(nwOrderData: Order) {
     });
     const { data } = response;
     return data;
-  } catch (error: any) {
-    throw new Error(
-      error.message ? error.messagge : 'Error al solicitar guardar pedido. ',
-    );
+  } catch (error) {
+    error instanceof Error
+      ? error.message
+      : 'Error al solicitar guardar pedido. ';
   }
 }
 
@@ -53,10 +67,12 @@ export async function putOrder(nwOrderData: Order) {
     console.log(URL);
     const response = await axios.put(`${URL}/orders`, nwOrderData);
     return response;
-  } catch (error: any) {
+  } catch (error) {
     console.log(error);
     throw new Error(
-      error.message ? error.messagge : 'Error al solicitar guardar pedido. ',
+      error instanceof Error
+        ? error.message
+        : 'Error al solicitar guardar pedido. ',
     );
   }
 }

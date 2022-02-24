@@ -9,6 +9,7 @@ import Navbar from './components/Navbar';
 import { OrderContextProvider } from './context/OrdersContext';
 import { UserContextProvider } from './context/UserContext';
 import HomePage from './pages/HomePage';
+import LoadExcelPage from './pages/LoadExcelPage';
 import LoginPage from './pages/LoginPage';
 import OrderObservationPage from './pages/OrderObservationPage';
 import { isLogged } from './services/user.service';
@@ -24,6 +25,7 @@ function App() {
 
             <Routes>
               <Route path="/" element={<HomePage />} />
+              <Route path="/excel" element={<LoadExcelPage />} />
               <Route path="/order/observe" element={<OrderObservationPage />} />
               <Route path="/login" element={<LoginPage />} />
               {isLogged() ? 'a' : 'b'}
