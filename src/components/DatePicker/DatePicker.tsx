@@ -27,7 +27,7 @@ const months = [
   'Diciembre',
 ];
 
-const locale : any = {
+const locale: any = {
   localize: {
     day: (n: number) => days[n],
     month: (n: number) => months[n],
@@ -46,7 +46,6 @@ const DatePicker = ({
 }: Props & ReactDatePickerProps & HTMLAttributes<HTMLElement>) => {
   return (
     <ReactDatePicker
-
       locale={locale}
       onChangeRaw={(e: React.FocusEvent<HTMLInputElement, Element>) =>
         e.preventDefault()

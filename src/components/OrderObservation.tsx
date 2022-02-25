@@ -94,26 +94,26 @@ export default function OrderObservation() {
   const handleDateChange: ((date: Date) => unknown) &
     ((date: Date | null, event: SyntheticEvent<Event>) => void) &
     FormEventHandler<HTMLElement> = (eventDate) => {
-      setInput((prevValue) => ({
-        ...prevValue,
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        //@ts-ignore
-        orderedDate: new Date(eventDate),
-      }));
-      console.log(input);
-    };
+    setInput((prevValue) => ({
+      ...prevValue,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //@ts-ignore
+      orderedDate: new Date(eventDate),
+    }));
+    console.log(input);
+  };
 
   const handleDateChange2: ((date: Date) => unknown) &
     ((date: Date | null, event: SyntheticEvent<Event>) => void) &
     FormEventHandler<HTMLElement> = (eventDate) => {
-      setInput((prevValue) => ({
-        ...prevValue,
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        //@ts-ignore
-        informedDate: new Date(eventDate),
-      }));
-      console.log(input);
-    };
+    setInput((prevValue) => ({
+      ...prevValue,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //@ts-ignore
+      informedDate: new Date(eventDate),
+    }));
+    console.log(input);
+  };
 
   const onSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();

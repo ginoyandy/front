@@ -36,10 +36,12 @@ type errorResponse = {
 
 export async function logInUser(user: UserLogin) {
   try {
+    console.log(user);
     const response = await axios.post(`${BASE_URL}/users/login`, user);
+    console.log(response);
     const { data } = response;
     saveToken(data.token);
-    return data as loginResponse;
+    return data;
   } catch (error) {
     console.log(error);
     throw new Error(

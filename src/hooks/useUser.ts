@@ -14,7 +14,7 @@ export const useUser = () => {
         const token = res.token;
         console.log(token);
         saveToken(token);
-        setUser({ username: logInData.username, token});
+        setUser({ username: logInData.username, token });
       })
       .catch((err) =>
         toast({
@@ -36,7 +36,7 @@ export const useUser = () => {
     return user?.token;
   };
 
-  const isLogged = () :boolean => Boolean(user.token); // While usser not logged, token is empty string or undefined.
+  const isLogged = (): boolean => Boolean(user.token); // While usser not logged, token is empty string or undefined.
 
   return {
     user,
@@ -44,6 +44,6 @@ export const useUser = () => {
     loginUser,
     logOutUser,
     getToken,
-    isLogged
+    isLogged,
   };
 };

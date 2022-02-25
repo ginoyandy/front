@@ -18,7 +18,7 @@ export default function HomeMain() {
         SUBASTAS Y NEGOCIOS INMOBILIARIOS
       </Heading>
 
-      <Link to={isLogged() ? '/causas' : '/login'}>
+      <Link to={isLogged() ? '/excel' : '/login'}>
         <Button mt={5}>
           {isLogged() ? 'Pedidos' : 'Iniciar sesión'}
           <ArrowForwardIcon marginStart={2} />
