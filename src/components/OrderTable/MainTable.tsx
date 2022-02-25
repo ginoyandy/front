@@ -1,0 +1,726 @@
+import {
+  Button,
+  Checkbox,
+  Flex,
+  Heading,
+  Table,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+} from '@chakra-ui/react';
+import React from 'react';
+import { useState } from 'react';
+
+export default function MainTable() {
+  const [orders, setOrders] = useState([
+    {
+      orderedDate: new Date(),
+      number: '3123213KKKKKKKKKKKK',
+      owners: [
+        {
+          firstName: 'Gino',
+          lastName: 'Massei',
+          dni: '418789970',
+        },
+        {
+          firstName: 'Andres',
+          lastName: 'Bardawngi',
+          dni: '42342344',
+        },
+      ],
+      office: '300 - ALVEAR',
+      adress: 'Dean Funes 923',
+      city: 'Oncativo',
+      department: 'Rio 2',
+      state: 'Cordoba',
+      enrollmentNumber: 3213,
+      folioNumber: 4,
+      volumeNumer: 5,
+      yearNumber: 2021,
+      observations: 'Casa Papa',
+      orderAmmount: 321312,
+      informedDate: new Date(),
+      totalArea: 123123,
+      bankName: 'Banco Macro',
+    },
+    {
+      orderedDate: new Date(),
+      number: '3123213KKKKKKKKKKKK',
+      owners: [
+        {
+          firstName: 'Gino',
+          lastName: 'Massei',
+          dni: '418789970',
+        },
+        {
+          firstName: 'Andres',
+          lastName: 'Bardawngi',
+          dni: '42342344',
+        },
+      ],
+      office: '300 - ALVEAR',
+      adress: 'Dean Funes 923',
+      city: 'Oncativo',
+      department: 'Rio 2',
+      state: 'Cordoba',
+      enrollmentNumber: 3213,
+      folioNumber: 4,
+      volumeNumer: 5,
+      yearNumber: 2021,
+      observations: 'Casa Papa',
+      orderAmmount: 321312,
+      informedDate: new Date(),
+      totalArea: 123123,
+      bankName: 'Banco Macro',
+    },
+    {
+      orderedDate: new Date(),
+      number: '3123213KKKKKKKKKKKK',
+      owners: [
+        {
+          firstName: 'Gino',
+          lastName: 'Massei',
+          dni: '418789970',
+        },
+        {
+          firstName: 'Andres',
+          lastName: 'Bardawngi',
+          dni: '42342344',
+        },
+      ],
+      office: '300 - ALVEAR',
+      adress: 'Dean Funes 923',
+      city: 'Oncativo',
+      department: 'Rio 2',
+      state: 'Cordoba',
+      enrollmentNumber: 3213,
+      folioNumber: 4,
+      volumeNumer: 5,
+      yearNumber: 2021,
+      observations: 'Casa Papa',
+      orderAmmount: 321312,
+      informedDate: new Date(),
+      totalArea: 123123,
+      bankName: 'Banco Macro',
+    },
+    {
+      orderedDate: new Date(),
+      number: '3123213KKKKKKKKKKKK',
+      owners: [
+        {
+          firstName: 'Gino',
+          lastName: 'Massei',
+          dni: '418789970',
+        },
+        {
+          firstName: 'Andres',
+          lastName: 'Bardawngi',
+          dni: '42342344',
+        },
+      ],
+      office: '300 - ALVEAR',
+      adress: 'Dean Funes 923',
+      city: 'Oncativo',
+      department: 'Rio 2',
+      state: 'Cordoba',
+      enrollmentNumber: 3213,
+      folioNumber: 4,
+      volumeNumer: 5,
+      yearNumber: 2021,
+      observations: 'Casa Papa',
+      orderAmmount: 321312,
+      informedDate: new Date(),
+      totalArea: 123123,
+      bankName: 'Banco Macro',
+    },
+    {
+      orderedDate: new Date(),
+      number: '3123213KKKKKKKKKKKK',
+      owners: [
+        {
+          firstName: 'Gino',
+          lastName: 'Massei',
+          dni: '418789970',
+        },
+        {
+          firstName: 'Andres',
+          lastName: 'Bardawngi',
+          dni: '42342344',
+        },
+      ],
+      office: '300 - ALVEAR',
+      adress: 'Dean Funes 923',
+      city: 'Oncativo',
+      department: 'Rio 2',
+      state: 'Cordoba',
+      enrollmentNumber: 3213,
+      folioNumber: 4,
+      volumeNumer: 5,
+      yearNumber: 2021,
+      observations: 'Casa Papa',
+      orderAmmount: 321312,
+      informedDate: new Date(),
+      totalArea: 123123,
+      bankName: 'Banco Macro',
+    },
+    {
+      orderedDate: new Date(),
+      number: '3123213KKKKKKKKKKKK',
+      owners: [
+        {
+          firstName: 'Gino',
+          lastName: 'Massei',
+          dni: '418789970',
+        },
+        {
+          firstName: 'Andres',
+          lastName: 'Bardawngi',
+          dni: '42342344',
+        },
+      ],
+      office: '300 - ALVEAR',
+      adress: 'Dean Funes 923',
+      city: 'Oncativo',
+      department: 'Rio 2',
+      state: 'Cordoba',
+      enrollmentNumber: 3213,
+      folioNumber: 4,
+      volumeNumer: 5,
+      yearNumber: 2021,
+      observations: 'Casa Papa',
+      orderAmmount: 321312,
+      informedDate: new Date(),
+      totalArea: 123123,
+      bankName: 'Banco Macro',
+    },
+    {
+      orderedDate: new Date(),
+      number: '3123213KKKKKKKKKKKK',
+      owners: [
+        {
+          firstName: 'Gino',
+          lastName: 'Massei',
+          dni: '418789970',
+        },
+        {
+          firstName: 'Andres',
+          lastName: 'Bardawngi',
+          dni: '42342344',
+        },
+      ],
+      office: '300 - ALVEAR',
+      adress: 'Dean Funes 923',
+      city: 'Oncativo',
+      department: 'Rio 2',
+      state: 'Cordoba',
+      enrollmentNumber: 3213,
+      folioNumber: 4,
+      volumeNumer: 5,
+      yearNumber: 2021,
+      observations: 'Casa Papa',
+      orderAmmount: 321312,
+      informedDate: new Date(),
+      totalArea: 123123,
+      bankName: 'Banco Macro',
+    },
+    {
+      orderedDate: new Date(),
+      number: '3123213KKKKKKKKKKKK',
+      owners: [
+        {
+          firstName: 'Gino',
+          lastName: 'Massei',
+          dni: '418789970',
+        },
+        {
+          firstName: 'Andres',
+          lastName: 'Bardawngi',
+          dni: '42342344',
+        },
+      ],
+      office: '300 - ALVEAR',
+      adress: 'Dean Funes 923',
+      city: 'Oncativo',
+      department: 'Rio 2',
+      state: 'Cordoba',
+      enrollmentNumber: 3213,
+      folioNumber: 4,
+      volumeNumer: 5,
+      yearNumber: 2021,
+      observations: 'Casa Papa',
+      orderAmmount: 321312,
+      informedDate: new Date(),
+      totalArea: 123123,
+      bankName: 'Banco Macro',
+    },
+    {
+      orderedDate: new Date(),
+      number: '3123213KKKKKKKKKKKK',
+      owners: [
+        {
+          firstName: 'Gino',
+          lastName: 'Massei',
+          dni: '418789970',
+        },
+        {
+          firstName: 'Andres',
+          lastName: 'Bardawngi',
+          dni: '42342344',
+        },
+      ],
+      office: '300 - ALVEAR',
+      adress: 'Dean Funes 923',
+      city: 'Oncativo',
+      department: 'Rio 2',
+      state: 'Cordoba',
+      enrollmentNumber: 3213,
+      folioNumber: 4,
+      volumeNumer: 5,
+      yearNumber: 2021,
+      observations: 'Casa Papa',
+      orderAmmount: 321312,
+      informedDate: new Date(),
+      totalArea: 123123,
+      bankName: 'Banco Macro',
+    },
+    {
+      orderedDate: new Date(),
+      number: '3123213KKKKKKKKKKKK',
+      owners: [
+        {
+          firstName: 'Gino',
+          lastName: 'Massei',
+          dni: '418789970',
+        },
+        {
+          firstName: 'Andres',
+          lastName: 'Bardawngi',
+          dni: '42342344',
+        },
+      ],
+      office: '300 - ALVEAR',
+      adress: 'Dean Funes 923',
+      city: 'Oncativo',
+      department: 'Rio 2',
+      state: 'Cordoba',
+      enrollmentNumber: 3213,
+      folioNumber: 4,
+      volumeNumer: 5,
+      yearNumber: 2021,
+      observations: 'Casa Papa',
+      orderAmmount: 321312,
+      informedDate: new Date(),
+      totalArea: 123123,
+      bankName: 'Banco Macro',
+    },
+    {
+      orderedDate: new Date(),
+      number: '3123213KKKKKKKKKKKK',
+      owners: [
+        {
+          firstName: 'Gino',
+          lastName: 'Massei',
+          dni: '418789970',
+        },
+        {
+          firstName: 'Andres',
+          lastName: 'Bardawngi',
+          dni: '42342344',
+        },
+      ],
+      office: '300 - ALVEAR',
+      adress: 'Dean Funes 923',
+      city: 'Oncativo',
+      department: 'Rio 2',
+      state: 'Cordoba',
+      enrollmentNumber: 3213,
+      folioNumber: 4,
+      volumeNumer: 5,
+      yearNumber: 2021,
+      observations: 'Casa Papa',
+      orderAmmount: 321312,
+      informedDate: new Date(),
+      totalArea: 123123,
+      bankName: 'Banco Macro',
+    },
+    {
+      orderedDate: new Date(),
+      number: '3123213KKKKKKKKKKKK',
+      owners: [
+        {
+          firstName: 'Gino',
+          lastName: 'Massei',
+          dni: '418789970',
+        },
+        {
+          firstName: 'Andres',
+          lastName: 'Bardawngi',
+          dni: '42342344',
+        },
+      ],
+      office: '300 - ALVEAR',
+      adress: 'Dean Funes 923',
+      city: 'Oncativo',
+      department: 'Rio 2',
+      state: 'Cordoba',
+      enrollmentNumber: 3213,
+      folioNumber: 4,
+      volumeNumer: 5,
+      yearNumber: 2021,
+      observations: 'Casa Papa',
+      orderAmmount: 321312,
+      informedDate: new Date(),
+      totalArea: 123123,
+      bankName: 'Banco Macro',
+    },
+    {
+      orderedDate: new Date(),
+      number: '3123213KKKKKKKKKKKK',
+      owners: [
+        {
+          firstName: 'Gino',
+          lastName: 'Massei',
+          dni: '418789970',
+        },
+        {
+          firstName: 'Andres',
+          lastName: 'Bardawngi',
+          dni: '42342344',
+        },
+      ],
+      office: '300 - ALVEAR',
+      adress: 'Dean Funes 923',
+      city: 'Oncativo',
+      department: 'Rio 2',
+      state: 'Cordoba',
+      enrollmentNumber: 3213,
+      folioNumber: 4,
+      volumeNumer: 5,
+      yearNumber: 2021,
+      observations: 'Casa Papa',
+      orderAmmount: 321312,
+      informedDate: new Date(),
+      totalArea: 123123,
+      bankName: 'Banco Macro',
+    },
+    {
+      orderedDate: new Date(),
+      number: '3123213KKKKKKKKKKKK',
+      owners: [
+        {
+          firstName: 'Gino',
+          lastName: 'Massei',
+          dni: '418789970',
+        },
+        {
+          firstName: 'Andres',
+          lastName: 'Bardawngi',
+          dni: '42342344',
+        },
+      ],
+      office: '300 - ALVEAR',
+      adress: 'Dean Funes 923',
+      city: 'Oncativo',
+      department: 'Rio 2',
+      state: 'Cordoba',
+      enrollmentNumber: 3213,
+      folioNumber: 4,
+      volumeNumer: 5,
+      yearNumber: 2021,
+      observations: 'Casa Papa',
+      orderAmmount: 321312,
+      informedDate: new Date(),
+      totalArea: 123123,
+      bankName: 'Banco Macro',
+    },
+    {
+      orderedDate: new Date(),
+      number: '3123213KKKKKKKKKKKK',
+      owners: [
+        {
+          firstName: 'Gino',
+          lastName: 'Massei',
+          dni: '418789970',
+        },
+        {
+          firstName: 'Andres',
+          lastName: 'Bardawngi',
+          dni: '42342344',
+        },
+      ],
+      office: '300 - ALVEAR',
+      adress: 'Dean Funes 923',
+      city: 'Oncativo',
+      department: 'Rio 2',
+      state: 'Cordoba',
+      enrollmentNumber: 3213,
+      folioNumber: 4,
+      volumeNumer: 5,
+      yearNumber: 2021,
+      observations: 'Casa Papa',
+      orderAmmount: 321312,
+      informedDate: new Date(),
+      totalArea: 123123,
+      bankName: 'Banco Macro',
+    },
+    {
+      orderedDate: new Date(),
+      number: '3123213KKKKKKKKKKKK',
+      owners: [
+        {
+          firstName: 'Gino',
+          lastName: 'Massei',
+          dni: '418789970',
+        },
+        {
+          firstName: 'Andres',
+          lastName: 'Bardawngi',
+          dni: '42342344',
+        },
+      ],
+      office: '300 - ALVEAR',
+      adress: 'Dean Funes 923',
+      city: 'Oncativo',
+      department: 'Rio 2',
+      state: 'Cordoba',
+      enrollmentNumber: 3213,
+      folioNumber: 4,
+      volumeNumer: 5,
+      yearNumber: 2021,
+      observations: 'Casa Papa',
+      orderAmmount: 321312,
+      informedDate: new Date(),
+      totalArea: 123123,
+      bankName: 'Banco Macro',
+    },
+    {
+      orderedDate: new Date(),
+      number: '3123213KKKKKKKKKKKK',
+      owners: [
+        {
+          firstName: 'Gino',
+          lastName: 'Massei',
+          dni: '418789970',
+        },
+        {
+          firstName: 'Andres',
+          lastName: 'Bardawngi',
+          dni: '42342344',
+        },
+      ],
+      office: '300 - ALVEAR',
+      adress: 'Dean Funes 923',
+      city: 'Oncativo',
+      department: 'Rio 2',
+      state: 'Cordoba',
+      enrollmentNumber: 3213,
+      folioNumber: 4,
+      volumeNumer: 5,
+      yearNumber: 2021,
+      observations: 'Casa Papa',
+      orderAmmount: 321312,
+      informedDate: new Date(),
+      totalArea: 123123,
+      bankName: 'Banco Macro',
+    },
+    {
+      orderedDate: new Date(),
+      number: '3123213KKKKKKKKKKKK',
+      owners: [
+        {
+          firstName: 'Gino',
+          lastName: 'Massei',
+          dni: '418789970',
+        },
+        {
+          firstName: 'Andres',
+          lastName: 'Bardawngi',
+          dni: '42342344',
+        },
+      ],
+      office: '300 - ALVEAR',
+      adress: 'Dean Funes 923',
+      city: 'Oncativo',
+      department: 'Rio 2',
+      state: 'Cordoba',
+      enrollmentNumber: 3213,
+      folioNumber: 4,
+      volumeNumer: 5,
+      yearNumber: 2021,
+      observations: 'Casa Papa',
+      orderAmmount: 321312,
+      informedDate: new Date(),
+      totalArea: 123123,
+      bankName: 'Banco Macro',
+    },
+    {
+      orderedDate: new Date(),
+      number: '3123213KKKKKKKKKKKK',
+      owners: [
+        {
+          firstName: 'Gino',
+          lastName: 'Massei',
+          dni: '418789970',
+        },
+        {
+          firstName: 'Andres',
+          lastName: 'Bardawngi',
+          dni: '42342344',
+        },
+      ],
+      office: '300 - ALVEAR',
+      adress: 'Dean Funes 923',
+      city: 'Oncativo',
+      department: 'Rio 2',
+      state: 'Cordoba',
+      enrollmentNumber: 3213,
+      folioNumber: 4,
+      volumeNumer: 5,
+      yearNumber: 2021,
+      observations: 'Casa Papa',
+      orderAmmount: 321312,
+      informedDate: new Date(),
+      totalArea: 123123,
+      bankName: 'Banco Macro',
+    },
+    {
+      orderedDate: new Date(),
+      number: '3123213KKKKKKKKKKKK',
+      owners: [
+        {
+          firstName: 'Gino',
+          lastName: 'Massei',
+          dni: '418789970',
+        },
+        {
+          firstName: 'Andres',
+          lastName: 'Bardawngi',
+          dni: '42342344',
+        },
+      ],
+      office: '300 - ALVEAR',
+      adress: 'Dean Funes 923',
+      city: 'Oncativo',
+      department: 'Rio 2',
+      state: 'Cordoba',
+      enrollmentNumber: 3213,
+      folioNumber: 4,
+      volumeNumer: 5,
+      yearNumber: 2021,
+      observations: 'Casa Papa',
+      orderAmmount: 321312,
+      informedDate: new Date(),
+      totalArea: 123123,
+      bankName: 'Banco Macro',
+    },
+    {
+      orderedDate: new Date(),
+      number: '3123213KKKKKKKKKKKK',
+      owners: [
+        {
+          firstName: 'Gino',
+          lastName: 'Massei',
+          dni: '418789970',
+        },
+        {
+          firstName: 'Andres',
+          lastName: 'Bardawngi',
+          dni: '42342344',
+        },
+      ],
+      office: '300 - ALVEAR',
+      adress: 'Dean Funes 923',
+      city: 'Oncativo',
+      department: 'Rio 2',
+      state: 'Cordoba',
+      enrollmentNumber: 3213,
+      folioNumber: 4,
+      volumeNumer: 5,
+      yearNumber: 2021,
+      observations: 'Casa Papa',
+      orderAmmount: 321312,
+      informedDate: new Date(),
+      totalArea: 123123,
+      bankName: 'Banco Macro',
+    },
+    {
+      orderedDate: new Date(),
+      number: '3123213KKKKKKKKKKKK',
+      owners: [
+        {
+          firstName: 'Gino',
+          lastName: 'Massei',
+          dni: '418789970',
+        },
+        {
+          firstName: 'Andres',
+          lastName: 'Bardawngi',
+          dni: '42342344',
+        },
+      ],
+      office: '300 - ALVEAR',
+      adress: 'Dean Funes 923',
+      city: 'Oncativo',
+      department: 'Rio 2',
+      state: 'Cordoba',
+      enrollmentNumber: 3213,
+      folioNumber: 4,
+      volumeNumer: 5,
+      yearNumber: 2021,
+      observations: 'Casa Papa',
+      orderAmmount: 321312,
+      informedDate: new Date(),
+      totalArea: 123123,
+      bankName: 'Banco Macro',
+    },
+    
+  ]);
+
+  return (
+    <div>
+      <Heading> Tabla de Pedidos</Heading>
+      <Table mt={2}>
+        <Thead>
+          <Tr bg="primary.dark">
+            <Th fontWeight={700} fontSize={18} color="#fff">
+              Selecc.
+            </Th>
+            <Th fontWeight={700} fontSize={18} color="#fff">
+              N° de solicitud
+            </Th>
+            <Th fontWeight={700} fontSize={18} color="#fff">
+              Fecha
+            </Th>
+            <Th fontWeight={700} fontSize={18} color="#fff">
+              Costo
+            </Th>
+            <Th fontWeight={700} fontSize={18} color="#fff">
+              Dirección
+            </Th>
+          </Tr>
+        </Thead>
+
+        <Tbody>
+          {orders.map((o, i) => (
+            <Tr key={i}>
+              <Td>
+                <Checkbox />
+              </Td>
+              <Td>{o.number}</Td>
+              <Td>{JSON.stringify(o.informedDate).slice(1, 11)}</Td>
+              <Td>{o.orderAmmount}</Td>
+              <Td>{o.adress}</Td>
+            </Tr>
+          ))}
+        </Tbody>
+      </Table>
+
+      <Flex direction="row" justifyContent="space-between" mt={4}>
+        <Button variant="outline">Volver atrás</Button>
+        <Button> Procesar</Button>
+      </Flex>
+    </div>
+  );
+}

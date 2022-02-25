@@ -20,7 +20,7 @@ export default function HomeMain() {
 
       <Link to={isLogged() ? '/excel' : '/login'}>
         <Button mt={5}>
-          {isLogged() ? 'Pedidos' : 'Iniciar sesión'}
+          {isLogged() ? 'Pedidos a partir de Excel' : 'Iniciar sesión'}
           <ArrowForwardIcon marginStart={2} />
         </Button>
       </Link>

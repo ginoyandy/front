@@ -12,6 +12,7 @@ import HomePage from './pages/HomePage';
 import LoadExcelPage from './pages/LoadExcelPage';
 import LoginPage from './pages/LoginPage';
 import OrderObservationPage from './pages/OrderObservationPage';
+import OrdersTablePage from './pages/OrdersTablePage';
 import { isLogged } from './services/user.service';
 import theme from './theme';
 
@@ -26,7 +27,11 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/excel" element={<LoadExcelPage />} />
-              <Route path="/order/observe" element={<OrderObservationPage />} />
+              <Route
+                path="/orders/observe"
+                element={<OrderObservationPage />}
+              />
+              <Route path="/orders/table" element={<OrdersTablePage />} />
               <Route path="/login" element={<LoginPage />} />
               {isLogged() ? 'a' : 'b'}
             </Routes>

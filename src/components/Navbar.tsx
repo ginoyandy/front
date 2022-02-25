@@ -3,7 +3,6 @@ import { Box, Button, Flex, Heading, Stack, Text } from '@chakra-ui/react';
 import React, { MouseEventHandler, ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 import { isLogged, logOut } from '../services/user.service';
-
 const NavBar = (props: { [x: string]: unknown }) => {
   const [isOpen, setIsOpen] = React.useState(false);
   const toggle: MouseEventHandler<HTMLDivElement> = () => setIsOpen(!isOpen);
@@ -102,7 +101,9 @@ const NavBar = (props: { [x: string]: unknown }) => {
   return (
     <NavBarContainer {...props}>
       <Flex direction="row" alignItems="center">
-        <Heading ms={4}> HQ - Asociados </Heading>
+        <Link to="/">
+          <Heading ms={4}> HQ - Asociados </Heading>
+        </Link>
       </Flex>
       <Box display={{ base: 'block', md: 'none' }} onClick={toggle}>
         {isOpen ? <CloseIcon /> : <HamburgerIcon />}

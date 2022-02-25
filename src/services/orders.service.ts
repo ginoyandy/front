@@ -2,7 +2,6 @@ import axios, { AxiosRequestHeaders } from 'axios';
 import { Order } from './../interfaces/Order';
 
 const token = window.localStorage.getItem('token');
-console.log(token);
 const headers: AxiosRequestHeaders = {
   Authorization: `Bearer ${token || 'missing_token'}`,
 };
