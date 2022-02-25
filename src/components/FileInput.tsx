@@ -48,7 +48,7 @@ const FileUpload = () => {
     }
 
     const fData = new FormData();
-    fData.append(selectedFile.formDataField, selectedFile.filename);
+    fData.append(selectedFile.formDataField, selectedFile.file, selectedFile.filename);
     loadExcel(fData)
       .then((res) => console.log(res))
       .catch((err) => {
