@@ -79,9 +79,7 @@ export async function putOrder(editOrderData: Order, id: string) {
 export async function getPdfByID(id: string) {
   try {
     console.log(URL);
-    const response = await axios.get(`${URL}/orders/pdf/${id}`, {headers:{
-      'ContentTyp'
-    }});
+    const response = await axios.get(`${URL}/orders/pdf/${id}`);
     return response;
   } catch (error: any) {
     console.log(error);

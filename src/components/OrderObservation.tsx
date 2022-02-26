@@ -62,14 +62,15 @@ export default function OrderObservation({ order }: { order: OrderDocument }) {
     }));
   };
 
-  const handleDateChange2: handleDateChangeType = (eventDate) =>
+  const handleDateChange2: handleDateChangeType = (eventDate) => {
     setUpdated(false);
-  setInput((prevValue) => ({
-    ...prevValue,
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    //@ts-ignore
-    informedDate: new Date(eventDate),
-  }));
+    setInput((prevValue) => ({
+      ...prevValue,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      //@ts-ignore
+      informedDate: new Date(eventDate),
+    }));
+  };
 
   const onSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
