@@ -1,9 +1,8 @@
-import React from 'react';
 import { Container as ChakraContainer } from '@chakra-ui/react';
-import { LayoutProps } from '@chakra-ui/styled-system/src/config/index';
+import React from 'react';
 
 type props = {
-  maxW?: LayoutProps['maxW'];
+  maxW?: any;
   children: JSX.Element | JSX.Element[];
 };
 
