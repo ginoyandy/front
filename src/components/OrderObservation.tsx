@@ -52,7 +52,8 @@ export default function OrderObservation({ order }: { order: OrderDocument }) {
     ((date: Date | null, event: SyntheticEvent<Event>) => void) &
     FormEventHandler<HTMLElement>;
 
-  const handleDateChange: handleDateChangeType = (eventDate) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleDateChange: handleDateChangeType = (eventDate: any) => {
     setUpdated(false);
     setInput((prevValue) => ({
       ...prevValue,
@@ -62,7 +63,8 @@ export default function OrderObservation({ order }: { order: OrderDocument }) {
     }));
   };
 
-  const handleDateChange2: handleDateChangeType = (eventDate) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleDateChange2: handleDateChangeType = (eventDate :any) => {
     setUpdated(false);
     setInput((prevValue) => ({
       ...prevValue,
