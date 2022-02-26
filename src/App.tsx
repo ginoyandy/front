@@ -12,7 +12,6 @@ import HomePage from './pages/HomePage';
 import LoadExcelPage from './pages/LoadExcelPage';
 import LoginPage from './pages/LoginPage';
 import MultipleObservationsPage from './pages/MultipleObservationsPage';
-import OrderObservationPage from './pages/OrderObservationPage';
 import OrdersTablePage from './pages/OrdersTablePage';
 import SelectionTablePage from './pages/SelectionTablePage';
 import { isLogged } from './services/user.service';
@@ -29,10 +28,6 @@ function App() {
             <Routes>
               <Route path="/" element={<HomePage />} />
               <Route path="/excel" element={<LoadExcelPage />} />
-              <Route
-                path="/orders/observe"
-                element={<OrderObservationPage />}
-              />
               <Route
                 path="/orders/multiple-observation"
                 element={<MultipleObservationsPage />}
