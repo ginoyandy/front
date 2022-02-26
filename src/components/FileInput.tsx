@@ -46,7 +46,7 @@ const FileUpload = () => {
     e.preventDefault();
     setFormValidation(true);
 
-    if (selectedFile.filename == undefined){
+    if (selectedFile.filename == undefined) {
       setFormValidation(false);
       return;
     }

@@ -86,7 +86,8 @@ export default function AddOwners({ owners, onUpdateOwnerList }: props) {
       <Table>
         <TableCaption>
           Utilizar la última fila de la tabla para agregar titulares. <br />{' '}
-          Utilizar los botones de eliminar de la columna ACCIONES para quitar un titular
+          Utilizar los botones de eliminar de la columna ACCIONES para quitar un
+          titular
         </TableCaption>
         <Thead>
           <Tr>

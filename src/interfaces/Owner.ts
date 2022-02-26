@@ -7,6 +7,6 @@ export interface Owner {
   ownerType: string;
 }
 
-export interface OwnerDocument extends Owner{
+export interface OwnerDocument extends Owner {
   _id: string;
 }

@@ -92,12 +92,13 @@ export default function OrderObservation({ order }: { order: OrderDocument }) {
   const getOrderPDF = async (id: string) => {
     getPdfByID(id)
       .then((res) => {
-        console.log(res);
+        console.log(res.data);
         const url = window.URL.createObjectURL(new Blob([res.data]));
         const link = document.createElement('a');
         link.href = url;
-        link.setAttribute('download', `solicitud-${order.orderNumber}`); //or any other extension
+        link.setAttribute('download', `solicitud-${order.orderNumber}.pdf`); 
         document.body.appendChild(link);
+        // This download the pdf
         link.click();
       })
       .catch((err) => {

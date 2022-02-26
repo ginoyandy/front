@@ -65,21 +65,30 @@ export async function newOrder(nwOrderData: Order) {
 export async function putOrder(editOrderData: Order, id: string) {
   try {
     console.log(URL);
-    const response = await axios.put(`${URL}/orders/${id}`, editOrderData);
+    const response = await axios.put(`${URL}/orders/${id}`, editOrderData, {
+      headers,
+    });
     return response;
   } catch (error: any) {
     console.log(error);
     console.log(error.response);
     console.log(error.response.data);
     console.log(error.response.data.message);
-    throw new Error( error.response.data.message);
+    throw new Error(error.response.data.message);
   }
 }
 
 export async function getPdfByID(id: string) {
   try {
     console.log(URL);
-    const response = await axios.get(`${URL}/orders/pdf/${id}`);
+    const response = await axios.get(`${URL}/orders/pdf/${id}`, {
+      headers: {
+        ...headers,
+      },
+      responseType: 'blob',
+    });
+    console.log('Axios', response);
+    console.log('Axios', response);
     return response;
   } catch (error: any) {
     console.log(error);

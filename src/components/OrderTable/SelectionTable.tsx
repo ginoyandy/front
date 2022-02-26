@@ -74,7 +74,7 @@ export default function SelectionTable() {
         .map((o) => ({
           ...o,
           orderedDate: new Date(o.orderedDate),
-          informedDate: new Date()
+          informedDate: new Date(),
         }));
       navigate('/orders/multiple-observation', { state: { selectedOrders } });
     }

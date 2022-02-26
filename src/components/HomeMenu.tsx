@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 export default function HomeMenu() {
   return (
     <>
-      <Heading textDecoration="underline" textUnderlineOffset={2} mb={2}>
+      <Heading textDecoration="underline" mb={2}>
         Acciones
       </Heading>
       <List>
