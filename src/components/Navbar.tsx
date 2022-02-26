@@ -53,7 +53,7 @@ const NavBar = (props: { [x: string]: unknown }) => {
           </>
         ) : (
           <>
-            <MenuItem to="/pedidos">
+            <MenuItem to="/orders/table">
               <Button size="md" rounded="md">
                 Pedidos
               </Button>

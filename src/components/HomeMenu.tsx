@@ -7,7 +7,7 @@ export default function HomeMenu() {
   return (
     <>
       <Heading textDecoration="underline" textUnderlineOffset={2} mb={2}>
-        Opciones
+        Acciones
       </Heading>
       <List>
         <Link to="/excel">

@@ -6,12 +6,14 @@ import {
   FormControl,
   FormErrorMessage,
   FormLabel,
+  grid,
   InputGroup,
   Text,
   useToast,
 } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { CSSProperties, useState } from 'react';
 import { loadExcel } from '../services/orders.service';
+import { useNavigate } from 'react-router-dom';
 
 type FileState = {
   filename: string;
@@ -23,6 +25,7 @@ const FileUpload = () => {
   const [selectedFile, setSelectedFile] = useState({} as FileState);
   const [formValidation, setFormValidation] = useState(true);
   const toast = useToast();
+  const navigate = useNavigate();
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormValidation(true);
@@ -42,15 +45,34 @@ const FileUpload = () => {
   const handleFormSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     setFormValidation(true);
-    if (selectedFile.filename === undefined) {
+
+    if (selectedFile.filename == undefined){
+      setFormValidation(false);
+      return;
+    }
+
+    const ArrfileExtension = selectedFile.filename.split('.');
+    const fileExtension = ArrfileExtension[ArrfileExtension.length - 1];
+    console.log('Formato del archivo ingresado:', fileExtension);
+
+    if (fileExtension !== 'xlsx') {
       setFormValidation(false);
       return;
     }
 
     const fData = new FormData();
-    fData.append(selectedFile.formDataField, selectedFile.file, selectedFile.filename);
+    fData.append(
+      selectedFile.formDataField,
+      selectedFile.file,
+      selectedFile.filename,
+    );
     loadExcel(fData)
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res);
+        navigate('/orders/selection-table', {
+          state: { stateOrders: res },
+        });
+      })
       .catch((err) => {
         console.log(err);
         toast({
@@ -66,6 +88,15 @@ const FileUpload = () => {
       });
   };
 
+  const labelStyle: CSSProperties = {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    columnGap: 8,
+  };
+
   return (
     <form onSubmit={handleFormSubmit}>
       <FormControl isInvalid={!formValidation}>
@@ -78,10 +109,10 @@ const FileUpload = () => {
           flexDirection={['column', 'column', 'row']}
           gap={2}
         >
-          <Button>
-            <AttachmentIcon me={2} />
-            <label htmlFor="files" className="btn">
-              Seleccione su archivo .xlsx (Excel)
+          <Button p={0}>
+            <label htmlFor="files" className="btn" style={labelStyle}>
+              <AttachmentIcon ms={4} />
+              <Text me={4}>Seleccione su archivo .xlsx (Excel)</Text>
             </label>
           </Button>
           <input

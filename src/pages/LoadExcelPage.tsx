@@ -5,7 +5,7 @@ import Container from '../layout/Container';
 export default function LoadExcelPage() {
   return (
     <Container>
-      <FileInput name="hola" placeholder="hola" />
+      <FileInput />
     </Container>
   );
 }

@@ -1,7 +1,6 @@
 import {
   Button,
   Checkbox,
-  Divider,
   Flex,
   Heading,
   Table,
@@ -11,8 +10,8 @@ import {
   Thead,
   Tr,
 } from '@chakra-ui/react';
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import PrimaryDivider from '../../layout/PrimaryDivider';
 
 export default function MainTable() {
   const [orders, setOrders] = useState([
@@ -681,7 +680,7 @@ export default function MainTable() {
   return (
     <div>
       <Heading> Tabla de Pedidos</Heading>
-      <Divider borderWidth="1px" borderColor="primary.light" />
+      <PrimaryDivider />
       <Table mt={2}>
         <Thead>
           <Tr bg="primary.dark">

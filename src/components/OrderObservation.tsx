@@ -1,8 +1,7 @@
-import { ArrowBackIcon } from '@chakra-ui/icons';
+import { ArrowBackIcon, DownloadIcon } from '@chakra-ui/icons';
 import {
   Box,
   Button,
-  Divider,
   Flex,
   FormControl,
   HStack,
@@ -11,78 +10,33 @@ import {
   Text,
   Textarea,
   useToast,
-  VStack
+  VStack,
 } from '@chakra-ui/react';
 import React, {
   ChangeEventHandler,
   FormEventHandler,
   SyntheticEvent,
   useEffect,
-  useState
+  useState,
 } from 'react';
-import { Order } from '../interfaces/Order';
-import { Owner } from '../interfaces/Owner';
+import { AxiosError } from 'axios';
+import { Order, OrderDocument } from '../interfaces/Order';
+import { Owner, OwnerDocument } from '../interfaces/Owner';
+import PrimaryDivider from '../layout/PrimaryDivider';
+import { getPdfByID, putOrder } from '../services/orders.service';
 import AddOwners from './AddOwners';
 import DatePicker from './DatePicker/DatePicker';
-export default function OrderObservation() {
+
+export default function OrderObservation({ order }: { order: OrderDocument }) {
   // const { getOrderById } = useOrders();
   const toast = useToast();
-  const [input, setInput] = useState({
-    orderedDate: new Date(),
-    number: '',
-    owners: [],
-    adress: '',
-    office: '',
-    city: '',
-    department: '',
-    state: '',
-    enrollmentNumber: 0,
-    folioNumber: 0,
-    volumeNumer: 0,
-    yearNumber: 0,
-    observations: '',
-    orderAmmount: 0,
-    informedDate: new Date(),
-    totalArea: 0,
-    bankName: '',
-  } as Order);
-
-  useEffect(() => {
-    setInput({
-      orderedDate: new Date(),
-      number: '3123213KKKKKKKKKKKK',
-      owners: [
-        {
-          firstName: 'Gino',
-          lastName: 'Massei',
-          dni: '418789970',
-        },
-        {
-          firstName: 'Andres',
-          lastName: 'Bardawngi',
-          dni: '42342344',
-        },
-      ],
-      office: '300 - ALVEAR',
-      adress: 'Dean Funes 923',
-      city: 'Oncativo',
-      department: 'Rio 2',
-      state: 'Cordoba',
-      enrollmentNumber: 3213,
-      folioNumber: 4,
-      volumeNumer: 5,
-      yearNumber: 2021,
-      observations: 'Casa Papa',
-      orderAmmount: 321312,
-      informedDate: new Date(),
-      totalArea: 123123,
-      bankName: 'Banco Macro',
-    });
-  }, []);
+  const [input, setInput] = useState(order as OrderDocument);
+  const [updated, setUpdated] = useState(false);
 
   const handleInputChange: ChangeEventHandler<
     HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
   > = (e) => {
+    setUpdated(false);
     setInput((prevValue) => ({
       ...prevValue,
       [e.target.id]: e.target.value,
@@ -90,6 +44,7 @@ export default function OrderObservation() {
   };
 
   const handleOwnersChange = (ownList: Owner[]) => {
+    setUpdated(false);
     setInput((prevValue) => ({ ...prevValue, owners: ownList }));
   };
 
@@ -98,6 +53,7 @@ export default function OrderObservation() {
     FormEventHandler<HTMLElement>;
 
   const handleDateChange: handleDateChangeType = (eventDate) => {
+    setUpdated(false);
     setInput((prevValue) => ({
       ...prevValue,
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -107,29 +63,51 @@ export default function OrderObservation() {
   };
 
   const handleDateChange2: handleDateChangeType = (eventDate) =>
-    setInput((prevValue) => ({
-      ...prevValue,
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      //@ts-ignore
-      informedDate: new Date(eventDate),
-    }));
+    setUpdated(false);
+  setInput((prevValue) => ({
+    ...prevValue,
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
+    informedDate: new Date(eventDate),
+  }));
 
   const onSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
     console.log(input);
-    // const response = await putOrder(input);
-    // console.log(response);
-    // .then((res) => console.log(res))
-    // .catch((err) => {
-    //   console.log(err);
-    //   toast({
-    //     status: 'error',
-    //     description:
-    //       err instanceof Error ? err.message : 'Error no controlado',
-    //     isClosable: true,
-    //     title: 'Error',
-    //   });
-    // });
+    putOrder(input, input._id)
+      .then((res) => {
+        setUpdated(true);
+      })
+      .catch((err: any) => {
+        toast({
+          status: 'error',
+          description: err.message,
+          isClosable: true,
+          title: 'Error',
+        });
+      });
+  };
+
+  const getOrderPDF = async (id: string) => {
+    getPdfByID(id)
+      .then((res) => {
+        console.log(res);
+        const url = window.URL.createObjectURL(new Blob([res.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `solicitud-${order.orderNumber}`); //or any other extension
+        document.body.appendChild(link);
+        link.click();
+      })
+      .catch((err) => {
+        console.log(err);
+        toast({
+          status: 'error',
+          description: err.message,
+          isClosable: true,
+          title: 'Error',
+        });
+      });
   };
 
   const boxHeadStyle: React.CSSProperties = {
@@ -162,23 +140,19 @@ export default function OrderObservation() {
 
               <Text style={{ whiteSpace: 'nowrap' }}>Fecha de solicitud: </Text>
               <FormControl>
-                {input.orderedDate ? (
-                  <DatePicker
-                    id="orderedDate"
-                    selectedDate={input.orderedDate}
-                    onChange={handleDateChange}
-                    showPopperArrow={true}
-                  />
-                ) : (
-                  <></>
-                )}
+                <DatePicker
+                  id="orderedDate"
+                  selectedDate={input.orderedDate}
+                  onChange={handleDateChange}
+                  showPopperArrow={true}
+                />
               </FormControl>
             </HStack>
             <HStack>
               <Text style={{ whiteSpace: 'nowrap' }}>Nro Solicitud: </Text>
               <Input
                 id="number"
-                value={input.number}
+                value={input.orderNumber}
                 onChange={handleInputChange}
               />
             </HStack>
@@ -214,22 +188,6 @@ export default function OrderObservation() {
             owners={input.owners}
             onUpdateOwnerList={handleOwnersChange}
           />
-          {/*input.owners !== [] ? (
-            input.owners.map((owner) => (
-              <Flex
-                direction="row"
-                key={owner.dni}
-                justifyContent="space-between"
-                ms={32}
-                me={16}
-              >
-                <Text>{`${owner.firstName} ${owner.lastName}`}</Text>
-                <Text>{owner.dni}</Text>
-              </Flex>
-            ))
-          ) : (
-            <></>
-          )*/}
         </Box>
 
         {/* BOX No3 = Domicilio */}
@@ -302,7 +260,17 @@ export default function OrderObservation() {
         {/* BOX No4 = Informe de dominio */}
         <Box border="1px solid #000" mb={2} paddingY={2} px={4}>
           <Text style={boxHeadStyle}>Informe de dominio</Text>
-          <Text>Matricula</Text>
+          <HStack mb={2}>
+            <Text style={{ whiteSpace: 'nowrap' }}>Matrícula: </Text>
+            <FormControl>
+              <Input
+                id="enrollmentNumber"
+                value={input.enrollmentNumber}
+                onChange={handleInputChange}
+                maxW="300px"
+              />
+            </FormControl>
+          </HStack>
           <Stack direction={['column', 'column', 'row']} align={'stretch'}>
             <Box flex={1}>
               <HStack>
@@ -388,7 +356,11 @@ export default function OrderObservation() {
                 <DatePicker
                   id="informedDate"
                   onChange={handleDateChange2}
-                  selectedDate={input.informedDate}
+                  selectedDate={
+                    input.informedDate === undefined
+                      ? new Date()
+                      : input.informedDate
+                  }
                 />
               </FormControl>
             </Box>
@@ -398,7 +370,7 @@ export default function OrderObservation() {
           </Flex>
         </Box>
 
-        <Divider mb={4} />
+        <PrimaryDivider />
         {/* BOX No6 = Costo y fecha */}
         <Flex direction="row" justifyContent="space-between">
           <Button variant="outline">
@@ -406,33 +378,21 @@ export default function OrderObservation() {
           </Button>
           <Button type="submit">Guardar</Button>
         </Flex>
-
-        {/* Input field for number */}
-        {/* Input field for owners */}
-        {/* Input field for adress */}
-        {/* Input field for city */}
-        {/* Input field for department */}
-        {/* Input field for state */}
-        {/* Input field for enrollmentNumber */}
-        {/* Input field for folioNumber */}
-        {/* Input field for volumeNumer */}
-        {/* Input field for yearNumber */}
-        {/* Input field for observations */}
-        {/* Input field for orderAmmount */}
-        {/* Input field for informedDate */}
-        {/* Input field for totalArea */}
-
-        {/* <FormControl isInvalid={isError}>
-          <FormLabel htmlFor="email">Email</FormLabel>
-          <Input
-            id="email"
-            type="email"
-            value={input}
-            onChange={handleInputChange}
-          />
-          <FormErrorMessage>Email is required.</FormErrorMessage>
-        </FormControl> */}
       </form>
+
+      {updated ? (
+        <Box mt={4} display="grid" placeItems="center">
+          <Button
+            backgroundColor="#b30c00"
+            _hover={{ bgColor: 'red' }}
+            onClick={() => getOrderPDF(order._id)}
+          >
+            <DownloadIcon /> Obtener PDF
+          </Button>
+        </Box>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

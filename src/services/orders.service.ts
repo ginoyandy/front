@@ -1,5 +1,6 @@
 import axios, { AxiosRequestHeaders } from 'axios';
 import { Order } from './../interfaces/Order';
+import { AxiosError } from 'axios';
 
 const token = window.localStorage.getItem('token');
 const headers: AxiosRequestHeaders = {
@@ -61,17 +62,32 @@ export async function newOrder(nwOrderData: Order) {
   }
 }
 
-export async function putOrder(nwOrderData: Order) {
+export async function putOrder(editOrderData: Order, id: string) {
   try {
     console.log(URL);
-    const response = await axios.put(`${URL}/orders`, nwOrderData);
+    const response = await axios.put(`${URL}/orders/${id}`, editOrderData);
     return response;
-  } catch (error) {
+  } catch (error: any) {
     console.log(error);
-    throw new Error(
-      error instanceof Error
-        ? error.message
-        : 'Error al solicitar guardar pedido. ',
-    );
+    console.log(error.response);
+    console.log(error.response.data);
+    console.log(error.response.data.message);
+    throw new Error( error.response.data.message);
+  }
+}
+
+export async function getPdfByID(id: string) {
+  try {
+    console.log(URL);
+    const response = await axios.get(`${URL}/orders/pdf/${id}`, {headers:{
+      'ContentTyp'
+    }});
+    return response;
+  } catch (error: any) {
+    console.log(error);
+    console.log(error.response);
+    console.log(error.response.data);
+    console.log(error.response.data.message);
+    throw new Error(error.response.data.message);
   }
 }

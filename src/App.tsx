@@ -11,8 +11,10 @@ import { UserContextProvider } from './context/UserContext';
 import HomePage from './pages/HomePage';
 import LoadExcelPage from './pages/LoadExcelPage';
 import LoginPage from './pages/LoginPage';
+import MultipleObservationsPage from './pages/MultipleObservationsPage';
 import OrderObservationPage from './pages/OrderObservationPage';
 import OrdersTablePage from './pages/OrdersTablePage';
+import SelectionTablePage from './pages/SelectionTablePage';
 import { isLogged } from './services/user.service';
 import theme from './theme';
 
@@ -31,7 +33,16 @@ function App() {
                 path="/orders/observe"
                 element={<OrderObservationPage />}
               />
+              <Route
+                path="/orders/multiple-observation"
+                element={<MultipleObservationsPage />}
+              />
+              <Route
+                path="/orders/selection-table"
+                element={<SelectionTablePage />}
+              />
               <Route path="/orders/table" element={<OrdersTablePage />} />
+
               <Route path="/login" element={<LoginPage />} />
               {isLogged() ? 'a' : 'b'}
             </Routes>

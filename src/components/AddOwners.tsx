@@ -99,7 +99,7 @@ export default function AddOwners({ owners, onUpdateOwnerList }: props) {
           </Tr>
         </Thead>
         <Tbody>
-          {owners.map((owner, i) => (
+          {owners?.map((owner, i) => (
             <Tr key={i}>
               <Td>{owner.firstName}</Td>
               <Td>{owner.lastName}</Td>
