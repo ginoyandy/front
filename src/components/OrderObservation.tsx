@@ -11,19 +11,19 @@ import {
   Text,
   Textarea,
   useToast,
-  VStack,
+  VStack
 } from '@chakra-ui/react';
 import React, {
   ChangeEventHandler,
   FormEventHandler,
   SyntheticEvent,
   useEffect,
-  useState,
+  useState
 } from 'react';
 import { Order } from '../interfaces/Order';
-import { putOrder } from '../services/orders.service';
+import { Owner } from '../interfaces/Owner';
+import AddOwners from './AddOwners';
 import DatePicker from './DatePicker/DatePicker';
-
 export default function OrderObservation() {
   // const { getOrderById } = useOrders();
   const toast = useToast();
@@ -78,7 +78,6 @@ export default function OrderObservation() {
       totalArea: 123123,
       bankName: 'Banco Macro',
     });
-    console.log('Init');
   }, []);
 
   const handleInputChange: ChangeEventHandler<
@@ -88,38 +87,38 @@ export default function OrderObservation() {
       ...prevValue,
       [e.target.id]: e.target.value,
     }));
-    //console.log(input);
   };
 
-  const handleDateChange: ((date: Date) => unknown) &
+  const handleOwnersChange = (ownList: Owner[]) => {
+    setInput((prevValue) => ({ ...prevValue, owners: ownList }));
+  };
+
+  type handleDateChangeType = ((date: Date) => unknown) &
     ((date: Date | null, event: SyntheticEvent<Event>) => void) &
-    FormEventHandler<HTMLElement> = (eventDate) => {
+    FormEventHandler<HTMLElement>;
+
+  const handleDateChange: handleDateChangeType = (eventDate) => {
     setInput((prevValue) => ({
       ...prevValue,
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-ignore
       orderedDate: new Date(eventDate),
     }));
-    console.log(input);
   };
 
-  const handleDateChange2: ((date: Date) => unknown) &
-    ((date: Date | null, event: SyntheticEvent<Event>) => void) &
-    FormEventHandler<HTMLElement> = (eventDate) => {
+  const handleDateChange2: handleDateChangeType = (eventDate) =>
     setInput((prevValue) => ({
       ...prevValue,
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       //@ts-ignore
       informedDate: new Date(eventDate),
     }));
-    console.log(input);
-  };
 
   const onSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
     event.preventDefault();
-    console.log('Acá');
-    const response = await putOrder(input);
-    console.log(response);
+    console.log(input);
+    // const response = await putOrder(input);
+    // console.log(response);
     // .then((res) => console.log(res))
     // .catch((err) => {
     //   console.log(err);
@@ -210,16 +209,12 @@ export default function OrderObservation() {
         <Box border="1px solid #000" mb={2} paddingY={2} px={4}>
           <Flex direction="row" justifyContent="space-between">
             <Text style={boxHeadStyle}>TITULAR / ES</Text>
-            <Text
-              style={{ ...boxHeadStyle, textDecoration: 'none' }}
-              ms={32}
-              me={16}
-            >
-              DNI / CUIT:
-            </Text>
           </Flex>
-
-          {input.owners !== [] ? (
+          <AddOwners
+            owners={input.owners}
+            onUpdateOwnerList={handleOwnersChange}
+          />
+          {/*input.owners !== [] ? (
             input.owners.map((owner) => (
               <Flex
                 direction="row"
@@ -234,7 +229,7 @@ export default function OrderObservation() {
             ))
           ) : (
             <></>
-          )}
+          )*/}
         </Box>
 
         {/* BOX No3 = Domicilio */}

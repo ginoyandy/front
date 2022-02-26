@@ -78,5 +78,6 @@ export default extendTheme({
         variant: 'base',
       },
     },
+    
   },
 });

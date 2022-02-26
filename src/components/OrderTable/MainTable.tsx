@@ -1,6 +1,7 @@
 import {
   Button,
   Checkbox,
+  Divider,
   Flex,
   Heading,
   Table,
@@ -675,12 +676,12 @@ export default function MainTable() {
       totalArea: 123123,
       bankName: 'Banco Macro',
     },
-    
   ]);
 
   return (
     <div>
       <Heading> Tabla de Pedidos</Heading>
+      <Divider borderWidth="1px" borderColor="primary.light" />
       <Table mt={2}>
         <Thead>
           <Tr bg="primary.dark">
