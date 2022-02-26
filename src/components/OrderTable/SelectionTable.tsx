@@ -94,7 +94,7 @@ export default function SelectionTable() {
               N° de solicitud
             </Th>
             <Th fontWeight={700} fontSize={18} color="#fff">
-              Denominación
+              Cliente
             </Th>
             <Th fontWeight={700} fontSize={18} color="#fff">
               Fecha

@@ -34,19 +34,6 @@ export default function HomeMenu() {
             Ver pedidos anteriores
           </ListItem>
         </Link>
-
-        <Link to="/orders/observe">
-          <ListItem
-            fontSize={18}
-            _hover={{
-              color: 'primary.semidark',
-              textDecoration: 'underline',
-            }}
-          >
-            <EditIcon me={2} />
-            Observar pedidos
-          </ListItem>
-        </Link>
       </List>
     </>
   );

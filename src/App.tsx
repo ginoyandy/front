@@ -3,7 +3,7 @@ import '@fontsource/open-sans';
 import '@fontsource/open-sans-condensed';
 import '@fontsource/source-sans-pro';
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
 import { OrderContextProvider } from './context/OrdersContext';
@@ -28,20 +28,27 @@ function App() {
 
             <Routes>
               <Route path="/" element={<HomePage />} />
-              <Route path="/excel" element={<LoadExcelPage />} />
-              
-              <Route
-                path="/orders/multiple-observation"
-                element={<MultipleObservationsPage />}
-              />
-              <Route
-                path="/orders/selection-table"
-                element={<SelectionTablePage />}
-              />
-              <Route path="/orders/table" element={<OrdersTablePage />} />
 
-              <Route path="/login" element={<LoginPage />} />
-              {isLogged() ? 'a' : 'b'}
+              {isLogged() ? (
+                <>
+                  <Route path="/excel" element={<LoadExcelPage />} />
+
+                  <Route
+                    path="/orders/multiple-observation"
+                    element={<MultipleObservationsPage />}
+                  />
+                  <Route
+                    path="/orders/selection-table"
+                    element={<SelectionTablePage />}
+                  />
+                  <Route path="/orders/table" element={<OrdersTablePage />} />
+                </>
+              ) : (
+                <>
+                  <Route path="/login" element={<LoginPage />} />
+                  <Route path="*" element={<Navigate to="/login"/>} />
+                </>
+              )}
             </Routes>
           </Box>
         </OrderContextProvider>

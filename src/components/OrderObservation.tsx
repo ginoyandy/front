@@ -96,7 +96,7 @@ export default function OrderObservation({ order }: { order: OrderDocument }) {
         const url = window.URL.createObjectURL(new Blob([res.data]));
         const link = document.createElement('a');
         link.href = url;
-        link.setAttribute('download', `solicitud-${order.orderNumber}.pdf`); 
+        link.setAttribute('download', `solicitud-${order.orderNumber}.pdf`);
         document.body.appendChild(link);
         // This download the pdf
         link.click();
@@ -360,8 +360,10 @@ export default function OrderObservation({ order }: { order: OrderDocument }) {
                   onChange={handleDateChange2}
                   selectedDate={
                     input.informedDate === undefined
-                      ? new Date()
-                      : input.informedDate
+                      ? typeof input.informedDate === 'string'
+                        ? new Date(input.informedDate)
+                        : new Date()
+                      : new Date()
                   }
                 />
               </FormControl>
@@ -374,10 +376,7 @@ export default function OrderObservation({ order }: { order: OrderDocument }) {
 
         <PrimaryDivider />
         {/* BOX No6 = Costo y fecha */}
-        <Flex direction="row" justifyContent="space-between">
-          <Button variant="outline">
-            <ArrowBackIcon /> Volver atrás
-          </Button>
+        <Flex direction="row" justifyContent="end">
           <Button type="submit">Guardar</Button>
         </Flex>
       </form>

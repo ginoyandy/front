@@ -38,6 +38,18 @@ export default extendTheme({
             color: '#333',
           },
         },
+        dark: {
+          fontFamily: 'Open Sans',
+          fontWeight: 300,
+          background: 'primary.dark',
+          backgroundColor: 'primary.dark',
+          color: '#fff',
+          _hover: {
+            background: '#999',
+            backgroundColor: '#999',
+            color: '#000'
+          },
+        },
         outline: {
           borderColor: 'primary.light',
           background: '#fff',
