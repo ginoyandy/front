@@ -12,7 +12,10 @@ import HomePage from './pages/HomePage';
 import LoadExcelPage from './pages/LoadExcelPage';
 import LoginPage from './pages/LoginPage';
 import MultipleObservationsPage from './pages/MultipleObservationsPage';
+<<<<<<< HEAD
 
+=======
+>>>>>>> d4568f4bef1715371c900215b9938c9c63b977b1
 import OrdersTablePage from './pages/OrdersTablePage';
 import SelectionTablePage from './pages/SelectionTablePage';
 import { isLogged } from './services/user.service';
