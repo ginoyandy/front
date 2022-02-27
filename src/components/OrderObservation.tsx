@@ -155,7 +155,7 @@ export default function OrderObservation({ order }: { order: OrderDocument }) {
             <HStack>
               <Text style={{ whiteSpace: 'nowrap' }}>Nro Solicitud: </Text>
               <Input
-                id="number"
+                id="orderNumber"
                 value={input.orderNumber}
                 onChange={handleInputChange}
               />
