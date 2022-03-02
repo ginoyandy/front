@@ -11,9 +11,9 @@ export interface Order {
   city: string;
   department: string;
   state: string;
-  enrollmentNumber: number;
-  folioNumber: number;
-  volumeNumber: number;
+  enrollmentNumber: string;
+  folioNumber: string;
+  volumeNumber: string;
   yearNumber: number;
   observations: string;
   orderAmmount: number;
