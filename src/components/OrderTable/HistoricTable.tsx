@@ -88,7 +88,6 @@ export default function HistoricTable() {
       return;
     }
 
-    
     setShowOrders(
       orders.filter(
         (o) =>

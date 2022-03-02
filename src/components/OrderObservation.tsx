@@ -64,7 +64,7 @@ export default function OrderObservation({ order }: { order: OrderDocument }) {
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const handleDateChange2: handleDateChangeType = (eventDate :any) => {
+  const handleDateChange2: handleDateChangeType = (eventDate: any) => {
     setUpdated(false);
     setInput((prevValue) => ({
       ...prevValue,
@@ -192,6 +192,14 @@ export default function OrderObservation({ order }: { order: OrderDocument }) {
             owners={input.owners}
             onUpdateOwnerList={handleOwnersChange}
           />
+          <Text style={boxHeadStyle}>Observaciones de los titulares:</Text>
+          <FormControl>
+            <Textarea
+              id="ownersObservations"
+              onChange={handleInputChange}
+              value={input.ownersObservations}
+            ></Textarea>
+          </FormControl>
         </Box>
 
         {/* BOX No3 = Domicilio */}
@@ -293,8 +301,8 @@ export default function OrderObservation({ order }: { order: OrderDocument }) {
                 <Text style={{ whiteSpace: 'nowrap' }}>Tomo: </Text>
                 <FormControl>
                   <Input
-                    id="volumeNumer"
-                    value={input.volumeNumer}
+                    id="volumeNumber"
+                    value={input.volumeNumber}
                     onChange={handleInputChange}
                   />
                 </FormControl>

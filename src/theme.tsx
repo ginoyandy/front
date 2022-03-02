@@ -47,7 +47,7 @@ export default extendTheme({
           _hover: {
             background: '#999',
             backgroundColor: '#999',
-            color: '#000'
+            color: '#000',
           },
         },
         outline: {

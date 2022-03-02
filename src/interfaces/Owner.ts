@@ -5,6 +5,7 @@ export interface Owner {
   dni: string;
   dniType: string;
   ownerType: string;
+  ownership: string;
 }
 
 export interface OwnerDocument extends Owner {

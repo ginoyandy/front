@@ -13,12 +13,12 @@ export interface Order {
   state: string;
   enrollmentNumber: number;
   folioNumber: number;
-  volumeNumer: number;
+  volumeNumber: number;
   yearNumber: number;
   observations: string;
   orderAmmount: number;
   informedDate: Date;
-  totalArea: number;
+  totalArea: string;
   office: string;
   remittance: string;
   providerFactory: string;
@@ -33,6 +33,7 @@ export interface Order {
   dni: string;
   dniType: string;
   ownerType: string;
+  ownersObservations: string;
 }
 
 export interface OrderDocument extends Order {

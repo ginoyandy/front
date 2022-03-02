@@ -78,6 +78,7 @@ export default function AddOwners({ owners, onUpdateOwnerList }: props) {
       dni: '',
       dniType: '',
       ownerType: '',
+      ownership: '',
     });
   };
 
@@ -91,6 +92,7 @@ export default function AddOwners({ owners, onUpdateOwnerList }: props) {
         </TableCaption>
         <Thead>
           <Tr>
+            <Th>%</Th>
             <Th>Nombre</Th>
             <Th>Apellido</Th>
             <Th>Tipo de documento</Th>
@@ -102,6 +104,7 @@ export default function AddOwners({ owners, onUpdateOwnerList }: props) {
         <Tbody>
           {owners?.map((owner, i) => (
             <Tr key={i}>
+              <Td>{owner.ownership}</Td>
               <Td>{owner.firstName}</Td>
               <Td>{owner.lastName}</Td>
               <Td>{owner.dniType}</Td>
@@ -120,6 +123,15 @@ export default function AddOwners({ owners, onUpdateOwnerList }: props) {
             </Tr>
           ))}
           <Tr>
+            <Td>
+              <FormControl>
+                <Input
+                  id="ownership"
+                  value={input.ownership}
+                  onChange={handleInputChange}
+                />
+              </FormControl>
+            </Td>
             <Td>
               <FormControl>
                 <Input

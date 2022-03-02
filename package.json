@@ -9,7 +9,8 @@
     "dev": "vite --open",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "start": "serve -s dist"
+    "start": "serve -s dist",
+    "format": "npx prettier --write ."
   },
   "dependencies": {
     "@chakra-ui/icons": "^1.1.1",
