@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { UserRegister, UserLogin } from '../schemas/user.schema';
 
-const BASE_URL = 'http://ec2-3-143-249-194.us-east-2.compute.amazonaws.com/api';
+const BASE_URL =
+  'http://ec2-18-228-197-173.sa-east-1.compute.amazonaws.com/api';
 console.log(BASE_URL);
 
 type registerResponse = {

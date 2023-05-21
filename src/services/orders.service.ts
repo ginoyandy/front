@@ -7,7 +7,7 @@ const token = window.localStorage.getItem('token');
 const headers: AxiosRequestHeaders = {
   Authorization: `Bearer ${token || 'missing_token'}`,
 };
-const URL = 'http://ec2-3-143-249-194.us-east-2.compute.amazonaws.com/api';
+const URL = 'http://ec2-18-228-197-173.sa-east-1.compute.amazonaws.com/api';
 
 export async function getOrders(): Promise<OrderDocument[]> {
   try {
